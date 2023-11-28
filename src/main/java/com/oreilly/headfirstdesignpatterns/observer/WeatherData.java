@@ -1,11 +1,8 @@
 package com.oreilly.headfirstdesignpatterns.observer;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +12,7 @@ public class WeatherData {
     private double humidity;
     private double temperature;
     private double barometricPressure;
-    private List<Display> displays = new ArrayList<>();
+    private Collection<Display> displays;
 
     public void add(Display display) {
         displays.add(display);

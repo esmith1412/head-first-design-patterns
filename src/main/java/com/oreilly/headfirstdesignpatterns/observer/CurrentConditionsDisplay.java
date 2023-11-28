@@ -1,8 +1,11 @@
 package com.oreilly.headfirstdesignpatterns.observer;
 
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CurrentConditionsDisplay extends Display {
 
     private double humidity;
@@ -10,7 +13,7 @@ public class CurrentConditionsDisplay extends Display {
     private double barometricPressure;
 
     public CurrentConditionsDisplay(WeatherData weatherData) {
-        super(weatherData);
+        this.weatherData = weatherData;
     }
 
     @Override

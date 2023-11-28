@@ -2,23 +2,17 @@ package com.oreilly.headfirstdesignpatterns.observer;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Display {
 
-    protected final WeatherData weatherData;
+    protected WeatherData weatherData;
 
     public abstract void show();
     public abstract void update();
-
-    public void add() {
-        weatherData.add(this);
-    }
-
-    public void remove() {
-        weatherData.remove(this);
-    }
 }
