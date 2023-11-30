@@ -1,7 +1,10 @@
 package com.oreilly.headfirstdesignpatterns.command;
 
+import java.util.Optional;
+
 public class RemoteControl {
 
+    private Command undoCommand;
     private final Command[] onCommands = new Command[7];
     private final Command[] offCommands = new Command[7];
 
@@ -20,10 +23,22 @@ public class RemoteControl {
 
     public void onButtonWasPressed(int slot) {
         onCommands[slot].execute();
+        undoCommand = onCommands[slot];
     }
 
     public void offButtonWasPressed(int slot) {
         offCommands[slot].execute();
+        undoCommand = offCommands[slot];
+    }
+
+    public void undoButtonWasPressed() {
+        Optional.ofNullable(undoCommand).ifPresent( command -> {
+
+            if (command instanceof UndoableCommand) {
+                ((UndoableCommand) command).undo();
+            }
+
+        });
     }
 
     public String toString() {
