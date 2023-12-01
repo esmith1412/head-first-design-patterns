@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public class RemoteControl {
 
-    private Command undoCommand;
+    private UndoableCommand undoCommand;
     private final Command[] onCommands = new Command[7];
     private final Command[] offCommands = new Command[7];
 
@@ -22,23 +22,25 @@ public class RemoteControl {
     }
 
     public void onButtonWasPressed(int slot) {
-        onCommands[slot].execute();
-        undoCommand = onCommands[slot];
+        var command = onCommands[slot];
+        command.execute();
+
+        if (command instanceof UndoableCommand)
+            undoCommand = (UndoableCommand) command;
+
     }
 
     public void offButtonWasPressed(int slot) {
-        offCommands[slot].execute();
-        undoCommand = offCommands[slot];
+        var command = offCommands[slot];
+        command.execute();
+
+        if (command instanceof UndoableCommand)
+            undoCommand = (UndoableCommand) command;
+
     }
 
     public void undoButtonWasPressed() {
-        Optional.ofNullable(undoCommand).ifPresent( command -> {
-
-            if (command instanceof UndoableCommand) {
-                ((UndoableCommand) command).undo();
-            }
-
-        });
+        Optional.ofNullable(undoCommand).ifPresent(UndoableCommand::undo);
     }
 
     public String toString() {
