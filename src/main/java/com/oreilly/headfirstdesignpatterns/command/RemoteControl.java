@@ -5,12 +5,26 @@ import java.util.Optional;
 public class RemoteControl {
 
     private UndoableCommand undoCommand;
-    private final Command[] onCommands = new Command[7];
-    private final Command[] offCommands = new Command[7];
+    private final Command[] onCommands;
+    private final Command[] offCommands;
 
     public RemoteControl() {
+        onCommands = new Command[7];
+        offCommands = new Command[7];
         var noCommand = new NoCommand();
+
         for (int i = 0; i < 7; i++) {
+            onCommands[i] = noCommand;
+            offCommands[i] = noCommand;
+        }
+    }
+
+    public RemoteControl(int size) {
+        onCommands = new Command[size];
+        offCommands = new Command[size];
+        var noCommand = new NoCommand();
+
+        for (int i = 0; i < size; i++) {
             onCommands[i] = noCommand;
             offCommands[i] = noCommand;
         }
