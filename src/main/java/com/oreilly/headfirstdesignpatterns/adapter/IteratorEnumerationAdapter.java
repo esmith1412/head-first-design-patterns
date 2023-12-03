@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.Enumeration;
 
 @AllArgsConstructor
-public class IteratorEnumerationAdapter<O> implements Enumeration<O> {
+public class IteratorEnumerationAdapter<E> implements Enumeration<E> {
 
-    private Iterator<O> iterator;
+    private Iterator<E> iterator;
 
     @Override
     public boolean hasMoreElements() {
@@ -16,7 +16,7 @@ public class IteratorEnumerationAdapter<O> implements Enumeration<O> {
     }
 
     @Override
-    public O nextElement() {
+    public E nextElement() {
         return iterator.next();
     }
 }
